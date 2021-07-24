@@ -1,8 +1,8 @@
 :: original author: debiedowner
 REM 参考 https://forum.vivaldi.net/topic/10592/patching-vivaldi-with-batch-scripts
 
-REM @でエコーを非表示、echo offで以降のエラーを抑制
 @echo off
+REM @でエコーを非表示、echo offで以降のエラーを抑制
 
 REM make current directory work when run as administrator
 REM このファイルのディレクトリをカレントディレクトリとする
@@ -42,8 +42,8 @@ if not exist "%latestVersionFolder%\browser.bak.html" (
 REM type: ファイル内容を表示
 echo copying js files to custom.js
 type *.js > "%latestVersionFolder%\custom.js"
-echo copying js files to custom.js
-type *.css > "%latestVersionFolder%\custom.css"
+REM echo copying css files to custom.css
+REM type *.css > "%latestVersionFolder%\custom.css"
 
 echo patching browser.html file
 REM 最後の2行以外をコピー
