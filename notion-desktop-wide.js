@@ -25,7 +25,7 @@
         // close the panel
         document.querySelector("#switch .webviewbtn.active").click();
       },
-      display: "<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 -1 18 18' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' /></svg>",
+      display: "<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 18 18' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' /></svg>",
       display_class: "panel-action-terminate"
     },
 
@@ -43,7 +43,15 @@
             <path d="m 10.425781,0 -5.5410155,4.96094 h -4.234375 v 4.74805 h 4.1074219 l 5.6679686,5.23047 z m 1.767579,1.50782 v 0.59961 c 0.628524,0 1.262682,0.52233 1.751953,1.49023 0.489269,0.96789 0.804686,2.34168 0.804686,3.86133 0,1.51964 -0.315417,2.89148 -0.804686,3.85937 -0.489271,0.9679 -1.123429,1.49219 -1.751953,1.49219 v 0.59961 c 0.949262,0 1.742407,-0.74276 2.287109,-1.82031 0.544702,-1.07756 0.869141,-2.52926 0.869141,-4.13086 0,-1.60161 -0.324439,-3.05525 -0.869141,-4.13281 -0.544702,-1.07755 -1.337847,-1.81836 -2.287109,-1.81836 z m -0.921875,1.97851 v 0.59961 c 0.378754,0 0.787693,0.3227 1.113281,0.9668 0.325586,0.64409 0.539061,1.57016 0.539061,2.5957 1e-6,1.02554 -0.213475,1.95161 -0.539061,2.5957 -0.325588,0.64409 -0.734527,0.9668 -1.113281,0.9668 v 0.59961 c 0.699491,0 1.267416,-0.54311 1.648436,-1.29687 0.381021,-0.75375 0.603517,-1.75774 0.603517,-2.86524 0,-1.1075 -0.222496,-2.11344 -0.603517,-2.86719 -0.38102,-0.75375 -0.948945,-1.29492 -1.648436,-1.29492 z"></path>
             </svg>`,
       display_class: "panel-action-mute"
-    }/*,
+    },
+    keynotionwide: {
+      title: "remove the padding at Notion",
+      script: function (_, webview) {
+        notionWide(webview);
+      },
+      display: `N`,
+      display_class: `panel-action-notion-wide`
+    },/*,
 
         template: {
             title: "",
@@ -54,6 +62,39 @@
             display_class: ``
         },*/
   };
+
+  function notionWide(webview) {
+    (function notionWideMain() {
+      function initNotionWide() {
+        if (true) {
+          doContentScript(webview, () => {
+            const style_element = document.createElement('style');
+            style_element.innerHTML = `
+@media (max-width: 850px) {
+  .notion-frame > .notion-scroller > div:not(.notion-page-content) > div,
+  .notion-page-content {
+      padding-left: 2.5em !important;
+      padding-right: 1em !important;
+  }
+
+  .notion-frame > .notion-scroller > div:not(.notion-page-content)[style*="padding"] {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+  }
+
+  div[data-block-id] {
+      max-width: unset !important;
+  }
+}`
+            document.body.appendChild(style_element);
+          })
+        } else {
+          setTimeout(initNotionWide, 1000);
+        }
+      }
+      setTimeout(initNotionWide, 1000);
+    })();
+  }
 
 
   function createElement(action, webview) {
@@ -128,12 +169,24 @@
     footerToolbar.style.display = "flex";
     footer.appendChild(footerToolbar);
     const webview = panel.querySelector("webview");
+    notionWide(webview)
     for (const key in ACTIONS) {
+      if (key == "keynotionwide" && !webview.src.startsWith('https://www.notion.so/')) {
+        continue;
+      }
       const action = ACTIONS[key];
       const newButton = createActionButton(action, webview);
       footerToolbar.appendChild(newButton);
     }
     panel.appendChild(footer);
+  }
+
+  /**
+   * upgrade a web panel by adding controls, listeners, etc.
+   * @param panel dom node
+   */
+  function upgradePanel(panel) {
+    addPanelControls(panel);
   }
 
   /**
