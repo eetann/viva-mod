@@ -66,10 +66,9 @@
   function notionWide(webview) {
     (function notionWideMain() {
       function initNotionWide() {
-        if (true) {
-          doContentScript(webview, () => {
-            const style_element = document.createElement('style');
-            style_element.innerHTML = `
+        try {
+          webview.insertCSS({
+            code: `
 @media (max-width: 850px) {
   .notion-frame > .notion-scroller > div:not(.notion-page-content) > div,
   .notion-page-content {
@@ -85,10 +84,8 @@
   div[data-block-id] {
       max-width: unset !important;
   }
-}`
-            document.body.appendChild(style_element);
-          })
-        } else {
+`})
+        } catch {
           setTimeout(initNotionWide, 1000);
         }
       }
