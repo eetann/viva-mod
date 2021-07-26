@@ -20,19 +20,19 @@ count=1
 selected=0
 echo "Installations found:"
 for dir in $vivaldi_installs ; do
-	echo $dir": "$count ;
-	((count++)) ;
+  echo $dir": "$count ;
+  ((count++)) ;
 done
 read -p "
 Select installation to patch.
 Input number and press [Enter] or [X] to cancel.
 Input selection: " selected ;
 if [ "$selected" = "X" ] ; then
-	exit ;
+  exit ;
 fi
 ((selected--)) ;
 if [ $selected -ge ${#vivaldi_install_dirs[@]} ] ; then
-    echo "Selection too large!"
+  echo "Selection too large!"
 fi
 dir=${vivaldi_install_dirs[$selected]} ;
 echo "---------------------
@@ -42,27 +42,37 @@ echo "Patch originating from "${mod_dir}" targeting "${vivaldi_install_dirs[$sel
 sudo cp "$dir/resources/vivaldi/browser.html" "$dir/resources/vivaldi/browser.html-$(date +%Y-%m-%dT%H-%M-%S)"
 
 alreadypatched=$(grep '<script src="custom.js"></script>' $dir/resources/vivaldi/browser.html);
-#alreadypatched=$(grep '<link rel="stylesheet" href="style/custom.css" />' $dir/resources/vivaldi/browser.html);
 if [ "$alreadypatched" = "" ] ; then
-    echo patching browser.html
-	#sudo sed -i -e 's/<\/head>/<link rel="stylesheet" href="style\/custom.css" \/> <\/head>/' "$dir/resources/vivaldi/browser.html"
-    	sudo sed -i -e 's/<\/body>/<script src="custom.js"><\/script> <\/body>/' "$dir/resources/vivaldi/browser.html"
+  echo patching browser.html
+  sudo sed -i -e 's/<\/body>/<script src="custom.js"><\/script> <\/body>/' "$dir/resources/vivaldi/browser.html"
 else
-        echo "browser.html has already been patched!"
+  echo "browser.html has already been patched!"
 fi
 
-#if [ -f "$mod_dir/custom.css" ] ; then
-#    echo copying custom.css
-#    sudo cp -f "$mod_dir/custom.css" "$dir/resources/vivaldi/style/custom.css"
-#else
-#    echo custom.css missing in $mod_dir
-#fi
+# alreadypatched=$(grep '<link rel="stylesheet" href="style/custom.css" />' $dir/resources/vivaldi/browser.html);
+# if [ "$alreadypatched" = "" ] ; then
+#   echo patching browser.html
+#   sudo sed -i -e 's/<\/head>/<link rel="stylesheet" href="style\/custom.css" \/> <\/head>/' "$dir/resources/vivaldi/browser.html"
+# else
+#   echo "browser.html has already been patched!"
+# fi
+# 
+# cat $mod_dir/*.css > $mod_dir/custom.css
+# 
+# if [ -f "$mod_dir/custom.css" ] ; then
+#   echo copying custom.css
+#   sudo cp -f "$mod_dir/custom.css" "$dir/resources/vivaldi/style/custom.css"
+#   rm $mod_dir/custom.css
+# else
+#   echo custom.css missing in $mod_dir
+# fi
 
-cat *.js > custom.js
+cat $mod_dir/*.js > $mod_dir/custom.js
 
 if [ -f "$mod_dir/custom.js" ] ; then
-    echo copying custom.js
-    sudo cp -f "$mod_dir/custom.js" "$dir/resources/vivaldi/custom.js"
+  echo copying custom.js
+  sudo cp -f "$mod_dir/custom.js" "$dir/resources/vivaldi/custom.js"
+  rm $mod_dir/custom.js
 else
-    echo custom.js missing in $mod_dir
+  echo custom.js missing in $mod_dir
 fi
