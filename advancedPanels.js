@@ -1,7 +1,7 @@
 (function advancedPanels() {
   "use strict";
 
-  const LANGUAGE = 'en_gb'; // change this
+  const LANGUAGE = 'ja'; // change this
 
   const l10n = {
     en_gb: {
@@ -25,90 +25,6 @@
       open_new_window: 'Open in new window',
       open_current: 'Open in current window'
     },
-    ko: {
-      title: '세션',
-      new_session: '새로운 세션',
-      session_name_placeholder: '세션 이름',
-      all_windows: '모든 창',
-      only_selected: '선택한 탭만',
-      add_session_btn: '세션 추가',
-      sort_title: '정렬',
-      sort_date: '날짜순 정렬',
-      sort_name: '이름순 정렬',
-      sort_asc: '오름차순 정렬',
-      sort_desc: '내림차순 정렬',
-      delete_button: '이 세션을 지우기',
-      delete_prompt: '$T 세션을 지우시겠습니까?',
-      delete_number_sessions: '선택한 $N개의 세션을 지우시겠습니까?',
-      delete_confirm: '⚠네',
-      delete_abscond: '아니오',
-      time_created_label: '만든 시각  <time></time>',
-      open_new_window: '새 창에서 열기',
-      open_current: '현재 창에서 열기'
-    },
-    it: {
-      title: 'Sessioni',
-      new_session: 'Nuova sessione',
-      session_name_placeholder: 'Nome sessione',
-      all_windows: 'Tutte le finestre',
-      only_selected: 'Solo schede selezionate',
-      add_session_btn: 'Aggiungi sessione',
-      sort_title: 'Ordina per...',
-      sort_date: 'Ordina per data',
-      sort_name: 'Ordina per nome',
-      sort_asc: 'Ordine crescente',
-      sort_desc: 'Ordine decrescente',
-      delete_button: 'Elimina questa sessione',
-      delete_prompt: 'Sei sicuro di voler eliminare $T?',
-      delete_number_sessions: 'Sei sicuro di voler eliminare $N sessioni selezionate?',
-      delete_confirm: '⚠ Sì, Elimina',
-      delete_abscond: 'No, non farlo.',
-      time_created_label: 'Creata <time></time>',
-      open_new_window: 'Apri in una nuova finestra',
-      open_current: 'Apri nella finestra corrente'
-    },
-    de: {
-      title: 'Sitzungen',
-      new_session: 'Neue Sitzung',
-      session_name_placeholder: 'Name der Sitzung',
-      all_windows: 'Alle Fenster',
-      only_selected: 'Nur ausgewählte Tabs',
-      add_session_btn: 'Sitzung hinzufügen',
-      sort_title: 'Sortieren nach...',
-      sort_date: 'Sortieren nach Datum',
-      sort_name: 'Sortieren nach Namen',
-      sort_asc: 'Aufsteigend sortieren',
-      sort_desc: 'Absteigend sortieren',
-      delete_button: 'Diese Sitzung löschen',
-      delete_prompt: 'Wollen Sie $T wirklich löschen?',
-      delete_number_sessions: 'Wollen Sie die $N ausgewählten Sitzungen wirklich löschen?',
-      delete_confirm: '⚠ Ja, löschen',
-      delete_abscond: 'Nein',
-      time_created_label: 'Erstellt <time></time>',
-      open_new_window: 'In neuem Fenster öffnen',
-      open_current: 'Im aktuellen Fenster öffnen'
-    },
-    nl: {
-      title: 'Sessies',
-      new_session: 'Nieuwe sessie',
-      session_name_placeholder: 'Sessienaam',
-      all_windows: 'Alle vensters',
-      only_selected: 'Alleen geselecteerde tabbladen',
-      add_session_btn: 'Sessie toevoegen',
-      sort_title: 'Sorteren op...',
-      sort_date: 'Sorteren op datum',
-      sort_name: 'Sorteren op naam',
-      sort_asc: 'Oplopend sorteren',
-      sort_desc: 'Aflopend sorteren',
-      delete_button: 'Sessie verwijderen',
-      delete_prompt: 'Weet u zeker dat u $T wilt verwijderen?',
-      delete_number_sessions: 'Weet u zeker dat u $N geselecteerde sessies wilt verwijderen?',
-      delete_confirm: '⚠ Ja, verwijderen',
-      delete_abscond: 'Nee, behouden',
-      time_created_label: 'Toegevoegd om <time></time>',
-      open_new_window: 'Openen in nieuw venster',
-      open_current: 'Openen in huidig venster'
-    },
     ja: {
       title: 'セッション',
       new_session: '新しいセッション',
@@ -129,62 +45,26 @@
       time_created_label: '作成日 <time></time>',
       open_new_window: '新しいウィンドウで開く',
       open_current: '現在のウィンドウで開く'
-    },
-    pt_br: {
-      title: 'Sessões',
-      new_session: 'Nova sessão',
-      session_name_placeholder: 'Nome da sessão',
-      all_windows: 'Todas as janelas',
-      only_selected: 'Apenas abas selecionadas',
-      add_session_btn: 'Adicionar sessão',
-      sort_title: 'Organizar por...',
-      sort_date: 'Organizar por data',
-      sort_name: 'Organizar por nome',
-      sort_asc: 'Organizar por ordem crescente',
-      sort_desc: 'Organizar por ordem decrescente',
-      delete_button: 'Deletar essa sessão',
-      delete_prompt: 'Você deseja deletar $T?',
-      delete_number_sessions: 'Você deseja deletar $N sessões selecionadas?',
-      delete_confirm: '⚠ Sim, delete',
-      delete_abscond: 'Não, não deletar.',
-      time_created_label: 'Criado em <time></time>',
-      open_new_window: 'Abrir em uma nova janela',
-      open_current: 'Abrir na janela atual'
-    },
-    pl_pl: {
-      title: 'Sesje',
-      new_session: 'Nowa sesja',
-      session_name_placeholder: 'Nazwa sesji',
-      all_windows: 'Wszystkie okna',
-      only_selected: 'Tylko zaznaczone karty',
-      add_session_btn: 'Dodaj sesję',
-      sort_title: 'Sortuj według...',
-      sort_date: 'Sortuj według daty',
-      sort_name: 'Sortuj według nazwy',
-      sort_asc: 'Sortuj rosnąco',
-      sort_desc: 'Sortuj malejąco',
-      delete_button: 'Usuń tę sesję',
-      delete_prompt: 'Czy jesteś pewien że chcesz usunąć $T?',
-      delete_number_sessions: 'Czy jesteś pewien że chcesz usunąć $N zaznaczonych sesji?',
-      delete_confirm: '⚠ Tak, usuń',
-      delete_abscond: 'Nie, nie usuwaj.',
-      time_created_label: 'Utworzono <time></time>',
-      open_new_window: 'Otwórz w nowym oknie',
-      open_current: 'Otwórz w obecnym oknie'
     }
-
   }[LANGUAGE];
 
   /**
-   * Key is the ID of your advanced panel. This must be UNIQUE (across the whole vivaldi UI). If in doubt, append your name to ensure it is unique
-   *     You can use this ID as a #selector in the advancedPanels.css file
+   * Key is the ID of your advanced panel.
+   *   This must be UNIQUE (across the whole vivaldi UI).
+   *   If in doubt, append your name to ensure it is unique
+   *   You can use this ID as a #selector in the advancedPanels.css file
    * title: String, self explanatory
-   * url: String, a UNIQUE (amongst web panels) vivaldi:// url that points to a non-existent page. You must add this as a web panel
-   * switch: String of HTML, this will be set as the html in the panel switch button. E.g. an SVG
-   * initialHTML: String of HTML, this will be used to fill in the panel with a skeleton of HTML to use
+   * url: String, a UNIQUE (amongst web panels) vivaldi:// url that points to a non-existent page.
+   *   You must add this as a web panel
+   * switch: String of HTML, this will be set as the html in the panel switch button.
+   *   E.g. an SVG
+   * initialHTML: String of HTML,
+   *   this will be used to fill in the panel with a skeleton of HTML to use
    * module: () => {onInit, onActivate} All necessary javascript should be included here.
-   *     onInit: () => void. This will be called AFTER the advanced panel DOM is added, but BEFORE onActivate is called.
-   *     onActivate: () => void. This will be called each time the advanced panel is opened AND IMMEDIATELY AFTER onInit.
+   *     onInit: () => void. This will be called AFTER the advanced panel DOM is added,
+   *       but BEFORE onActivate is called.
+   *     onActivate: () => void. This will be called each time the advanced panel is opened
+   *       AND IMMEDIATELY AFTER onInit.
    */
   const CUSTOM_PANELS = {
     sessions_lonm: {
@@ -529,7 +409,26 @@
           onActivate: onActivate
         };
       }
-    }
+    }/*,
+    template: {
+      title: "Title",
+      url: "You must add this as a web panel",
+      switch: `<div></div>`,
+      initialHTML: `<div></div>`,
+      module: function () {
+        function onActivate() {
+          ;
+        }
+        function onInit() {
+          ;
+        }
+
+        return {
+          onInit: onInit,
+          onActivate: onActivate
+        };
+      }
+    } */
   };
 
 
@@ -759,163 +658,4 @@
   }
 
   initMod();
-})();
-
-
-(function advancedPanelsCSS() {
-  function initMod() {
-    let s = document.createElement("style")
-    s.innerHTML = `
-.panel[advancedpanel="true"] header .toolbar .back, /* hide the web panel back/reload buttons         */
-.panel[advancedpanel="true"] header .toolbar .forward,
-.panel[advancedpanel="true"] header .toolbar .reload,
-.panel[advancedpanel="true"] header .toolbar .home,
-.panel[advancedpanel="true"] footer /* this last one is to prevent collision with panel actions mod { */
-    display: none !important;
-}
-
-.panel[advancedpanel="true"] > div {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.panel[advancedpanel="true"] button {
-    background: var(--colorBg);
-}
-
-
-/*
-* CSS For Sessions Panel
-                                                                                                       */
-#sessions_lonm .sessionslist li {
-    display: flex;
-    flex-direction: row;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 8px
-}
-
-#sessions_lonm .sessionslist li div {
-    flex-grow: 1;
-    padding-right: 4px;
-}
-
-#sessions_lonm .sessionslist li button {
-    width: 24px;
-    height: 24px;
-}
-
-#sessions_lonm .sessionslist li span {
-    font-size: smaller;
-}
-
-#sessions_lonm li h3 , #sessions_lonm li div {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-#sessions_lonm li:hover {
-    background: var(--colorHighlightBgAlpha);
-}
-#sessions_lonm li.selected {
-    background: var(--colorHighlightBg);
-    color: var(--colorHighlightFg);
-}
-
-#sessions_lonm li button {
-    display: none;
-}
-#sessions_lonm li.selected button {
-    display: block;
-}
-
-#sessions_lonm .sortselector-button {
-    display: none;
-}
-#sessions_lonm .sortselector-button.selected {
-    display: block;
-}
-
-#sessions_lonm .open_current svg {
-    width: 16px;
-    left: -3.5px;
-    position: relative;
-}
-
-#sessions_lonm .open_new svg {
-    width: 20px;
-    position: relative;
-    left: -5.5px;
-}
-#sessions_lonm .modal-container{
-    display: none;
-}
-
-#sessions_lonm .show.modal-container {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#sessions_lonm .confirm {
-    width: 90%;
-    height: 130px;
-    background: var(--colorBg);
-    color: var(--colorFg);
-    background-color: var(--colorBgLight);
-    box-shadow: var(--shadowOverlay);
-    border-radius: var(--radiusHalf);
-}
-
-#sessions_lonm .confirm p:nth-of-type(1) {
-    margin: 20px;
-}
-
-#sessions_lonm .confirm p:nth-of-type(2) {
-    margin-left: 20px;
-}
-
-#sessions_lonm .confirm button {
-    margin: 20px;
-    border: 1px solid var(--colorBorder);
-    height: 28px;
-    padding: 0 18px;
-    -webkit-user-select: none;
-    color: var(--colorFg);
-    background-image: linear-gradient(var(--colorBgLightIntense) 0%, var(--colorBg) 100%);
-}
-
-#sessions_lonm .confirm button:hover {
-    background-image: linear-gradient(var(--colorBg), var(--colorBg));
-}
-
-
-#sessions_lonm .newSession {
-    padding: 4px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-column-gap: 6px;
-    grid-row-gap: 6px;
-}
-
-#sessions_lonm .newSession h2,
-#sessions_lonm .newSession input[type="text"]{
-    grid-column: 1/3;
-}
-
-#sessions_lonm .newSession label input + span {
-    margin-left: 10px;
-}
-  `
-    document.head.appendChild(s)
-  }
-  setTimeout(initMod, 500);
 })();
