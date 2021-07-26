@@ -10,7 +10,7 @@
 #            users can now use vivaldi://experiments to change CSS in UI
 
 # TODO: Change mod_dir
-mod_dir=$HOME/path/to/dir
+mod_dir=$HOME/ghq/github.com/eetann/viva-mod
 
 vivaldi_installs=$(dirname $(find /opt -name "vivaldi-bin" )) ;
 vivaldi_install_dirs=( $vivaldi_installs ) ;
@@ -57,6 +57,8 @@ fi
 #else
 #    echo custom.css missing in $mod_dir
 #fi
+
+cat *.js > custom.js
 
 if [ -f "$mod_dir/custom.js" ] ; then
     echo copying custom.js
