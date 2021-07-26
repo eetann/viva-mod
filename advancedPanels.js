@@ -494,6 +494,32 @@
     convertWebPanelToAdvancedPanel(e.currentTarget.parentElement.parentElement);
   }
 
+  function notionWide(webview) {
+    function webviewLoaded() {
+      webview.insertCSS({
+        code: `
+@media (max-width: 850px) {
+  .notion-frame > .notion-scroller > div:not(.notion-page-content) > div,
+  .notion-page-content {
+      padding-left: 2.5em !important;
+      padding-right: 1em !important;
+  }
+
+  .notion-frame > .notion-scroller > div:not(.notion-page-content)[style*="padding"] {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+  }
+
+  div[data-block-id] {
+      max-width: unset !important;
+  }
+`
+      })
+      webview.removeEventListener("contentload", webviewLoaded);
+    }
+    webview.addEventListener("contentload", webviewLoaded);
+  }
+
   /**
    * Attempt to convert a web panel to an advanced panel.
    * First check if the SRC matches a registered value.
@@ -511,6 +537,10 @@
     if (!addedWebview.src) {
       addedWebview.addEventListener("contentload", webviewLoaded);
       return;
+    }
+    console.log(addedWebview.src);
+    if (addedWebview.src.startsWith('https://www.notion.so/')) {
+      notionWide(addedWebview);
     }
     for (const key in CUSTOM_PANELS) {
       const panel = CUSTOM_PANELS[key];
