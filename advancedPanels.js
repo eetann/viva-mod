@@ -409,6 +409,72 @@
           onActivate: onActivate
         };
       }
+    },
+    temporary_panel: {
+      title: "Temporary Panel",
+      url: "vivaldi://temporary_panel",
+      switch: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.871 4A17.926 17.926 0 003 12c0 2.874.673 5.59 1.871 8m14.13 0a17.926 17.926 0 001.87-8c0-2.874-.673-5.59-1.87-8M9 9h1.246a1 1 0 01.961.725l1.586 5.55a1 1 0 00.961.725H15m1-7h-.08a2 2 0 00-1.519.698L9.6 15.302A2 2 0 018.08 16H8" />
+</svg>`,
+      initialHTML: `<style type="text/css">
+    .my-panel {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+    }
+    .my-panel-adressbar {
+      display; flex;
+    }
+    .my-panel-adress {
+      width: 90%;
+      padding: 2px 4px;
+      font-size: 14px;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+  </style>
+  <div id="tmpPanel" class="my-panel">
+    <div class="my-panel-adressbar">
+      <input list="urls" id="tmpPanelInput" class="my-panel-adress" placeholder="Select for Web Panel" />
+      <datalist id="urls">
+        <option value="https://github.com">GitHub</option>
+        <option value="https://github.com/eetann">GitHub/eetann</option>
+        <option value="https://www.deepl.com/translator">DeepL</option>
+        <option value="https://zenn.dev/articles">Zenn articles</option>
+        <option value="https://zenn.dev/eetann">Zenn eetann</option>
+      </datalist>
+      <button id="newTemporalPanel">Go</button>
+    </div>
+  </div>
+  `,
+      module: function () {
+        function onClickNewTemporalPanel() {
+          let val = document.getElementById("tmpPanelInput").value;
+          let prevWebview = document.getElementById("nowWebview");
+          if (prevWebview) {
+            prevWebview.remove();
+          }
+          let webview = document.createElement("webview");
+          webview.id = "nowWebview";
+          webview.src = val;
+          webview.style.position = "relative";
+          webview.style.width = "100%";
+          webview.style.height = "inherit";
+          let myPanel = document.getElementById("tmpPanel");
+          myPanel.appendChild(webview)
+        }
+        function onActivate() {
+          ;
+        }
+        function onInit() {
+          document.getElementById("newTemporalPanel").addEventListener("click", onClickNewTemporalPanel);
+        }
+
+        return {
+          onInit: onInit,
+          onActivate: onActivate
+        };
+      }
     }/*,
     template: {
       title: "Title",
@@ -538,7 +604,6 @@
       addedWebview.addEventListener("contentload", webviewLoaded);
       return;
     }
-    console.log(addedWebview.src);
     if (addedWebview.src.startsWith('https://www.notion.so/')) {
       notionWide(addedWebview);
     }
