@@ -497,6 +497,33 @@
     } */
   };
 
+  function addTemporaryBar(node) {
+    if (node.getAttribute("temporaryBar")) {
+      return;
+    }
+    node.setAttribute("temporaryBar", "true");
+    const newHTML = document.createElement("div");
+    newHTML.innerHTML = `
+    <div class="temporary-bar">
+      <input list="temporary_url" id="tmpPanelInput" class="temporary-bar-input" placeholder="Select for Web Panel" />
+      <datalist id="temporary_url">
+        <option value="https://github.com">GitHub</option>
+        <option value="https://github.com/eetann">GitHub/eetann</option>
+        <option value="https://www.deepl.com/translator">DeepL</option>
+        <option value="https://zenn.dev/articles">Zenn articles</option>
+        <option value="https://zenn.dev/eetann">Zenn eetann</option>
+      </datalist>
+      <button id="newTemporayURL">Go</button>
+    </div>`;
+    let after = node.querySelector(".webpanel-content");
+    node.insertBefore(newHTML, after);
+    // panel.module().onInit();
+    // ADVANCED_PANEL_ACTIVATION.observe(node, {attributes: true, attributeFilter: ["class"]});
+    // if (node.querySelector("header.webpanel-header")) {
+    //   advancedPanelOpened(node);
+    //   setTimeout(() => {updateAdvancedPanelTitle(node);}, 500);
+    // }
+  }
 
   /**
    * Observe for changes to the UI, e.g. if panels are hidden by going in to fullscreen mode
@@ -607,13 +634,18 @@
     if (addedWebview.src.startsWith('https://www.notion.so/')) {
       notionWide(addedWebview);
     }
+    let is_custom_panel = false;
     for (const key in CUSTOM_PANELS) {
       const panel = CUSTOM_PANELS[key];
       const expectedURL = panel.url;
       if (addedWebview.src.startsWith(expectedURL)) {
         advancedPanelCreated(node, panel, key);
+        is_custom_panel = true;
         break;
       }
+    }
+    if (!is_custom_panel) {
+      addTemporaryBar(node);
     }
   }
 
