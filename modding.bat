@@ -1,7 +1,6 @@
 :: original author: debiedowner
-REM 参考 https://forum.vivaldi.net/topic/10592/patching-vivaldi-with-batch-scripts
-
 @echo off
+REM 参考 https://forum.vivaldi.net/topic/10592/patching-vivaldi-with-batch-scripts
 REM @でエコーを非表示、echo offで以降のエラーを抑制
 
 REM make current directory work when run as administrator
@@ -11,7 +10,7 @@ cd "%~dp0"
 REM =の前後には空白を入れないこと
 REM 変数のセットはset、参照は%で括る
 REM TODO: Change installPath
-set installPath="C:\Program Files\Vivaldi\Application\"
+set installPath=C:\PROGRA~1\Vivaldi\Application\
 if not exist "%installPath%" (
     set installPath="%USERPROFILE%\AppData\Local\Vivaldi\Application\"
 )
@@ -29,6 +28,7 @@ for /f "tokens=*" %%a in ('dir /a:-d /b /s %installPath%') do (
 )
 
 if "%latestVersionFolder%"=="" (
+	echo not found latest version folder
 	pause & exit
 ) else (
 	echo Found latest version folder: "%latestVersionFolder%"
